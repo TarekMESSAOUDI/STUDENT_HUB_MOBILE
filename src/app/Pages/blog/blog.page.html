@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Blog</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Blog -->
+  <div class="wrapper">
+    <div class="main-card">
+      <div class="cards" >
+        <div class="card">
+          <div class="content">
+            <div class="cover-picture-box">
+              <div class="cover-picture">
+                <img src='http://localhost:9091/User/ESPRIT.jpeg' alt="Photo de Couverture" style="width: 94% ; margin-left:4%;" />
+              </div>
+            </div>
+            <img src="http://localhost:9091/User/ESPRIT.jpeg" alt="Photo de profile" class="profile-picture" alt="Profile-picture"/>
+            <h3 style="transform:translateY(-150%);font-style: Poppins;">ESPRIT</h3>
+            <h1 class="blog-title"style="font-size:70px;transform:translateY(-80%);font-style: Poppins;">NEW BLOG</h1>
+            <br>
+            <br>
+            <small style="transform:translateY(-300%);font-style: Poppins;">Published on : 10-07-2022</small>
+            <div class="img">
+              <img src="http://localhost:9091/Blog/Blog.jpeg" alt="Blog Picture" style="width: 100%; height: 200px;"/>
+            </div>
+            <br>
+            <p style="margin-left: 10%; margin-right: 10%; text-align: center; color: black; font-size: medium; font-family: Arial, Helvetica, sans-serif; text-indent: 5px;">description</p>
+            <br>
+            <p style="margin-left: 60%; color: #03c1ad;"> 1 Comments </p>
+            <p style="color: #03C1AD; margin-top: -38px; margin-left: -82%;">3 Likes</p>
+            <br>
+            <br>
+            <!--Add Comment-->
+            <div class="form-group" *ngIf="comment" [hidden]="hideCommentform">
+              <input style="width: 70%; height: 40px; margin-left: 0px;" type="text" class="form-control" placeholder="Comment" [(ngModel)]="comment.description" required #description="ngModel"/>
+              <a href="/home/blogs/blog">
+                <button  routerLink="/home/blogs/blog" class="btn btn-primary" style="height: 40px; margin-left: 3%; width: 70px;" (click)="addComment(comment)" [disabled]="description.invalid"> Add </button>
+              </a>
+            </div>
+          </div>
+          <br>
+          <br>
+          <!--Comments-->
+          <div class="main-card"  *ngFor="let com of commentaire">
+            <div class="cards">
+              <div class="card" style="width: 94% ; margin-left: 3%;">
+                <div class="content">
+                  <li style="list-style-type: none; float: left; margin-left: -85%; margin-top: 10px;">
+                    <img class="comPic" src="http://localhost:9091/User/{{ com.user.profileImage }}" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #03c1ad; display: inline; margin-left: 20px;" alt="profile Image"/>
+                    <a class="nav-link" style="font-weight: bold; display: inline; color: black; margin-left: 20px; margin-bottom: 30px;">
+                      <i class="ion-md-power"></i> &nbsp; {{com.user.nom}} {{com.user.prenom}}
+                      <br>
+                      <br>
+                      <small class="pub" style="margin-left: 125px;display: block;transform: translateY(-26px);">Published on : {{com.date}}</small>
+                    </a>
+                  </li>
+                  <p style="margin-left: 8%; margin-right:8% ; margin-top: 10px; color: black; text-align: justify;" >{{com.description}}</p>
+                  <br>
+                </div>
+                <a href="/home/blogs/blog" (click)="deleteCommentaire(com._id)" [hidden]="hideSupp(com.user._id)"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

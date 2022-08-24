@@ -1,0 +1,166 @@
+<ion-header style="background-color: #ffff;">
+  <input type="checkbox" id="active">
+  <label for="active" class="menu-btn"><span></span></label>
+  <label for="active" class="close"></label>
+  <br>
+  <br>
+  <div class="wrapper">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div *ngIf="user" class="dashboard">
+      <h3 style="display: block; color: black;">Hi
+        <img src="../../../assets/images/wave.gif" width="30px" alt="Hello">
+        , {{ user.nom }}
+      </h3>
+      <p style="display: block !important; text-align: center; color: black; width: 100%;">{{ user.titre }}</p><br>
+      <ul class="nav">
+        <li class="nav-item" routerLink="/home/profile" routerLinkActive="active" style="width: 180px; margin: 15px; height: 40px;">
+          <a href="/home/profile" style="line-height: 0.1px;">Profile</a>
+        </li>
+        <li *ngIf="showcalendar" class="nav-item" style="width: 180px; margin: 15px; height: 40px;">
+          <a href="/home/calendar">Calendar</a>
+        </li>
+        <li *ngIf="showuniversitycalendar" class="nav-item" style="width: 180px; margin: 15px; height: 40px;">
+          <a href="/home/calendrier-universitaire">University Calendar</a>
+        </li>
+        <div *ngIf="hidedocument" class="d-inline-block">
+          <li *ngIf="hidedocument" class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" >
+            <a href="home/demande-document">School Document</a>
+          </li>
+        </div>
+        <div *ngIf="hidedocument" class="d-inline-block">
+          <li *ngIf="hidedocument" class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" >
+            <a href="home/matiere" >Corses</a>
+          </li>
+        </div>
+        <div *ngIf="showdocument"  class="d-inline-block">
+          <li *ngIf="showdocument" class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" >
+            <a href="home/matiere" >Corses</a>
+          </li>
+        </div>
+        <div *ngIf="showdocument"  class="d-inline-block">
+          <li *ngIf="showdocument" class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" >
+            <a href="home/demande-document">School Document</a>
+          </li>
+        </div>
+        <li class="nav-item" routerLinkActive="active" routerLink="/home/gestion-blog" style="width: 180px; margin: 15px; height: 40px;">
+          <i class="fa-solid fa-file-pen" style="color: #03c1ad;  vertical-align: -50%; margin-right: 15px;font-size: medium;"></i>
+          <a href="/home/gestion-blog">My Blogs</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" routerLink="/home/gestion-event" style="width: 180px; margin: 15px; height: 40px;">
+          <a href="/home/gestion-event">My Events</a>
+        </li>
+        <div [hidden]="hideuniversities" ngbDropdown class="d-inline-block">
+          <li [hidden]="hideuniversities" class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" ngbDropdownToggle>
+            <a>Universities</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="border-radius: 30px; border: solid #03c1ad;width: 250px">
+              <button ngbDropdownItem >
+                <a routerLink="home/universities" routerLinkActive="active" > All Universities </a>
+              </button>
+              <hr>
+              <button ngbDropdownItem *ngFor="let un of listUniversite"><a (click)="setIdUniversite(un._id); getUniversiteById()" href="home/university" > {{un.nom}} </a></button>
+            </div>
+          </li>
+        </div>
+        <li [hidden]="hidefiliere" class="nav-item" routerLink="home/university" routerLinkActive="active" style="width: 180px; margin: 15px; height: 40px;">
+          <a href="home/university">My {{ user.nom }}</a>
+        </li>
+        <div ngbDropdown class="d-inline-block">
+          <li class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" ngbDropdownToggle>
+            <a>Settings</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="border-radius: 30px; border: solid #03c1ad;width: 250px">
+              <button ngbDropdownItem><a href="home/settings">Update Profile</a></button>
+              <button ngbDropdownItem><a href="home/changeMdp">Change Password</a></button>
+              <button ngbDropdownItem><a href="home/changePImage">Update Profile Image</a></button>
+              <button ngbDropdownItem><a href="home/changeCImage">Update Cover Image</a></button>
+              <button [hidden]="hideinstitutimage" ngbDropdownItem><a href="home/changeIImage">Update Institut Image</a></button>
+            </div>
+          </li>
+        </div>
+      </ul>
+      <hr />
+      <br />
+      <img src="http://localhost:9091/User/{{ user.institutImage }}" style="width: 180px; height: 100px; margin-left: 15px; border: 2px solid #03c1ad; display: block;" alt="Institut picture"/>
+    </div>
+  </div>
+  <div style=" margin-top: -95px; margin-left: 80%;">
+    <a routerLink="/home"><img src="../../../../assets/images/logo.png" alt="Pikoro" style="width: 45px; height: 45px; margin-right: 20px;"/></a>
+  </div>
+  <br>
+  <br>
+  <br>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="user" class="wrap-box">
+    <br>
+    <div class="cover-picture-box">
+      <div class="cover-picture" >
+        <img class="CP" src="http://localhost:9091/User/{{ user.coverImage }}" alt="Photo de Couverture" />
+      </div>
+    </div>
+    <img src="http://localhost:9091/User/{{ user.profileImage }}" alt="Photo de profile" class="profile-picture" alt="Profile-picture"/>
+    <h3>{{ user.nom }} {{ user.prenom }}</h3>
+    <div class="row">
+      <div  class="col-md-7">
+        <div class="user-information">
+          <ul class="user-info">
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faFlag"></fa-icon>&nbsp; &nbsp;{{ user.paye }}</h4>
+              <hr />
+            </li>
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faMapMarker"></fa-icon>&nbsp; &nbsp;{{ user.ville }},{{user.rue}} : {{ user.codePostal }}</h4>
+              <hr />
+            </li>
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faUniversity"></fa-icon>&nbsp; &nbsp;{{ nomInstitut }} </h4>
+              <hr />
+            </li>
+            <li class="user-item">
+              <h4></h4>
+            </li>
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faCalendar"></fa-icon>&nbsp; &nbsp;{{ user.dateNaissance }}</h4>
+              <hr />
+            </li>
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faEnvelope"></fa-icon>&nbsp; &nbsp;{{ user.email }}</h4>
+              <hr />
+            </li>
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faObjectGroup"></fa-icon>&nbsp; &nbsp;{{ user.softSkills }}</h4>
+              <hr />
+            </li>
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faInfoCircle"></fa-icon>&nbsp; &nbsp;About</h4>
+              <textarea style="height: 132px !important; width: 97% ; font-size: medium" value="{{ user.bio }}"></textarea>
+              <br />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div  style="height: 100%;" class="col-md-5" >
+        <div class="user-information">
+          <ul class="user-info">
+            <li class="user-item">
+              <h4><fa-icon style="color: #03c1ad;" [icon]="faBrain"></fa-icon>&nbsp; &nbsp;Skills</h4>
+              <div class="skills" >
+                <h6>{{ user.skills[0] }}</h6>
+                <h6>{{ user.skills[1] }}</h6>
+                <h6>{{ user.skills[2] }}</h6>
+                <h6>{{ user.skills[3] }}</h6>
+                <h6>{{ user.skills[4] }}</h6>
+              </div>
+              <hr />
+            </li>
+              <small>UY : {{ date }} - {{ nextYears }}</small>
+          </ul>
+        </div>
+        <img src="../../assets/images/profile-icon.png" alt="" />
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,222 @@
+<ion-header>
+  <div class="logo">
+    <a routerLink="/home"><img src="../../../../assets/images/logo.png" alt="Pikoro"/></a>
+  </div>
+  <input type="checkbox" id="active">
+  <label for="active" class="menu-btn"><span></span></label>
+  <label for="active" class="close"></label>
+  <div class="wrapper">
+    <ul>
+      <li [hidden]="hideLogout" class="lili">
+        <a href="/home/profile">
+          <img class="userProfile" routerLink="/home/profile" src="http://localhost:9091/User/{{ profileImage }}" alt=""/>
+        </a>
+      </li>
+      <li [hidden]="hideLogout" style="margin-bottom: 50px; margin-top: -20px;">
+        <a routerLink="/home/login" (click)="logout()" style="color: #03C1AD; font-weight:bold ;">
+          <i class="ion-md-power" ></i>Logout
+        </a>
+      </li>
+      <li [hidden]="hideLogin">
+        <img class="log-in-logo" style="width: 30px; height: 30px" src="../../assets/images/Vector.png"/>
+        <a class="log-in-logo" style=" font-weight: bold; color: #03c1ad; margin-left: 0px; margin-bottom: 10px;" routerLink="/home/login">Log in</a>
+      </li>
+      <li><a routerLink="" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/home/howitwork" routerLinkActive="active">How it works</a></li>
+      <li><a routerLink="/home/events" routerLinkActive="active">Events</a></li>
+      <li><a routerLink="/home/blogs" routerLinkActive="active">Blog</a></li>
+      <li><a routerLink="/home/partnership" routerLinkActive="active">Partenership</a></li>
+      <li><a routerLink="/home/contact" routerLinkActive="active">Get in touch</a></li>
+      <li><div class="slim-header-right"></div></li>
+    </ul>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Digitlize your Academic career -->
+  <div class="container1">
+    <h1><b>Digitlize</b> your Academic career</h1>
+    <p>Everything that you need as a student in a one<br>place, accessible anywhere and everytime.<br>Your digital academic portfolio is here ! </p>
+    <div>
+      <div class="astro">
+        <img src="../../../../assets/images/astro.png">
+      </div>
+    </div>
+    <a href="/home/contact"><button type="button" class="btn btn-light">Join US !</button></a>
+    <a href="/home/howitwork"><button type="button" class="btn btn-dark">Help ?</button></a>
+  </div>
+  <!-- Who we are !!!!!!!!!!!! -->
+  <div class="container2">
+    <h2>Who are we ?</h2>
+    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Exercitation veniam consequat sunt nostrud amet.Exercitation veniam consequat sunt nostrud amet.</p>
+    <img src="../../../../assets/images/video-man.png" >
+    <a href="/home/contact"><button type="button" class="btn btn-dark">Join Us !</button></a>
+  </div>
+  <!-- How it works!!!!! -->
+  <div class="container3">
+    <h1>How it works ?</h1>
+    <p>Learn more about NatHub</p>
+    <h2>Step 1</h2>
+    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Exercitation veniam consequat sunt nostrud amet.Exercitation veniam consequat sunt nostrud amet.</p>
+    <img src="../../assets/images/screen1.png" >
+    <a href="/home/contact"><button type="button" class="btn btn-dark">Join Us !</button></a>
+  </div>
+  <!-- Events !!!!!!! -->
+  <div class="container4">
+    <h1>Recent Events</h1>
+    <br>
+    <h3>Wow ! Here is {{nEvent}} Events</h3>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="min-card-event">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="../../assets/images/screen1.png" class="userImage" alt="...">
+            <h3>Tarek MESSAOUDI</h3>
+            <p>Start At : 10/07/2022: 10:00</p>
+            <p>End At : 10/07/2022: 18:00</p>
+            <img src="../../assets/images/video-man.png" class="eventImage" alt="...">
+            <h2 style="text-align: center;">Title Here</h2>
+            <p>Description Here !</p>
+            <a href="/home">
+              <fa-icon style="color: #03C1AD" [icon]="faThumbsUp"  class="material-icons"></fa-icon>
+            </a>
+            <p class="like-pargraph">3 Like</p>
+            <p class="comments-pargraph">3 Comments</p>
+          </div>
+          <div class="carousel-item">
+            <img src="../../assets/images/screen1.png" class="userImage" alt="...">
+            <h3>Tarek MESSAOUDI</h3>
+            <p>Start At : 10/07/2022: 10:00</p>
+            <p>End At : 10/07/2022: 18:00</p>
+            <img src="../../assets/images/screen1.png" class="eventImage" alt="...">
+            <h2 style="text-align: center;">Title Here</h2>
+            <p>Description Here !</p>
+            <a href="/home">
+              <fa-icon style="color: #03C1AD" [icon]="faThumbsUp"  class="material-icons"></fa-icon>
+            </a>
+            <p class="like-pargraph">3 Like</p>
+            <p class="comments-pargraph">3 Comments</p>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <a href="/home/contact"><button type="button" class="btn btn-dark">Join Us !</button></a>
+    </div>
+  </div>
+  <!-- Blog!!!!!!!!!!!! -->
+  <div class="container5">
+    <h1>Recent Blogs</h1>
+    <br>
+    <h3>Wow ! Here is {{nBlogs}} Blogs</h3>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="min-card-event">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="../../assets/images/screen1.png" class="userImage" alt="...">
+            <h3>Tarek MESSAOUDI</h3>
+            <p>Start At : 10/07/2022: 10:00</p>
+            <p>End At : 10/07/2022: 18:00</p>
+            <img src="../../assets/images/video-man.png" class="eventImage" alt="...">
+            <h2 style="text-align: center;">Title Here</h2>
+            <p>Description Here !</p>
+            <a href="/home">
+              <fa-icon style="color: #03C1AD" [icon]="faThumbsUp"  class="material-icons"></fa-icon>
+            </a>
+            <p class="like-pargraph">3 Like</p>
+            <p class="comments-pargraph">3 Comments</p>
+          </div>
+          <div class="carousel-item">
+            <img src="../../assets/images/screen1.png" class="userImage" alt="...">
+            <h3>Tarek MESSAOUDI</h3>
+            <p>Start At : 10/07/2022: 10:00</p>
+            <p>End At : 10/07/2022: 18:00</p>
+            <img src="../../assets/images/screen1.png" class="eventImage" alt="...">
+            <h2 style="text-align: center;">Title Here</h2>
+            <p>Description Here !</p>
+            <a href="/home">
+              <fa-icon style="color: #03C1AD" [icon]="faThumbsUp"  class="material-icons"></fa-icon>
+            </a>
+            <p class="like-pargraph">3 Like</p>
+            <p class="comments-pargraph">3 Comments</p>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <a href="/home/contact"><button type="button" class="btn btn-dark">Join Us !</button></a>
+    </div>
+  </div>
+  <!-- What they say about us -->
+  <div class="container6">
+    <h2>What they say about us</h2>
+    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Exercitation veniam consequat sunt nostrud amet.Exercitation veniam consequat sunt nostrud amet.</p>
+    <img src="../../../../assets/images/steps.png" >
+    <a href="/home/contact"><button type="button" class="btn btn-dark">Join Us !</button></a>
+  </div>
+
+  <ion-footer>
+    <footer data-aos="fade-down" data-aos-duration="600" data-aos-easing="ease-in-sine">
+      <div class="row primary" data-aos="fade-down" data-aos-duration="1000" data-aos-easing="ease-in-sine">
+        <div class="column-logo" style="align-items: center;">
+          <div class="logo">
+            <img src="assets/images/white-logo.png" alt="">
+            <h1>PIKORO</h1>
+            <fa-icon [icon]="faFacebook" style="color:blue;font-size: 1.8em;margin-right:20px; margin-left: 20px;"></fa-icon>
+            <fa-icon [icon]="faYoutube" style="color:red;font-size: 2em;margin-right:20px;"></fa-icon>
+            <fa-icon [icon]="faInstagram" style="color:blueviolet;margin-right:20px; font-size: 2em;"></fa-icon>
+            <fa-icon [icon]="faLinkedIn" style="color: royalblue;margin-right:20px;font-size: 2em;"></fa-icon>
+          </div>
+        </div>
+        <div class="column about" style="text-align: center;" >
+          <h4 >Menu</h4>
+          <a routerLink="/home" routerLinkActive="active">Home</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">How it works?</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Events</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Blog</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Partnership</a>
+        </div>
+        <div class="column about" style="text-align: center;">
+          <h4>A Propos de nous</h4>
+          <a routerLink="/home/contact" routerLinkActive="active">Notre Entreprise</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Nous Objectives</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Responsabilité Sociale</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Nos Bureau</a>
+          <br>
+          <a routerLink="/home/contact" routerLinkActive="active">Plus D'informations</a>
+        </div>
+        <div class="column about">
+          <fa-icon [icon]="faPhone" style="color:white;font-size: large; margin-right: 5px;"></fa-icon>
+          <a href="#" style="display: inline;">+216 123 123 123</a>
+          <br />
+          <fa-icon [icon]="faEmail" style="color:white; margin-right: 5px; font-size: large; "></fa-icon>
+          <a href="#" style="display: inline; ">Pikoro@gmail.com</a>
+        </div>
+      </div>
+    </footer>
+    <div class="copyright-text" >
+      <p> Powred by  PIKORO 2021 © | All Rights Reserved</p>
+    </div>
+  </ion-footer>
+
+</ion-content>
+

@@ -1,0 +1,293 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Calendar</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--Header-->
+  <div style="display: block;align-items: center;margin-left: 47%;margin-bottom: 20px;">
+    <button style="width: 115px;  margin-right: 13px; margin-bottom: 10px;" (click)="toggleWeekends()" class="btn btn-primary">weekends</button>
+    <button *ngIf="showaddevent" style="width: 115px;margin-bottom: 10px;"  (click)="open(content)" class="btn btn-primary">New Seance</button>
+    <button *ngIf="!showaddevent" style="width: 115px;margin-bottom: 10px;" (click)="openNote(contentNote)" class="btn btn-primary">New Note</button>
+  </div>
+  <!--Calendar-->
+  <full-calendar defaultView="dayGridMonth" #calendar deepChangeDetection="true" [options]="calendarOptions"></full-calendar>
+  <br>
+  <br>
+  <!--Events-->
+  <div *ngIf="showaddevent" class="table-responsive">
+  <!-- <button *ngIf="!edit" class="btn btn-primary" (click)="showEditForm()" style="width: 100px;"> Edit </button>
+    <a href="/home/calendar"><button *ngIf="edit" class="btn btn-primary" > Cancel </button></a>
+    <br>
+    <br>-->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Starts At</th>
+          <th>Ends At</th>
+          <th>Matter</th>
+          <th>Teacher</th>
+          <th>Schoolroom</th>
+          <th>Class</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of events">
+          <td *ngIf="!edit">{{e.title}}</td>
+          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.title">-->
+          <td *ngIf="!edit">{{e.start}}</td>
+          <!--<td *ngIf="edit"><input type="datetime-local" [(ngModel)]="e.start">-->
+          <td *ngIf="!edit">{{e.end}}</td>
+          <!--<td *ngIf="edit"><input type="datetime-local" [(ngModel)]="e.end">-->
+          <td *ngIf="!edit">{{e.matiere.nom}}</td>
+          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.matiere.nom">-->
+          <td *ngIf="!edit">{{e.enseignant.nom}} {{e.enseignant.prenom}}</td>
+          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.enseignant.nom">-->
+          <td *ngIf="!edit">{{e.salle.bloc}}{{e.salle.etage}}{{e.salle.numero}}</td>
+          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.salle.numero">-->
+          <td *ngIf="!edit">{{e.classs.nom}}</td>
+          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.classe.nom">-->
+          <td>
+            <button *ngIf="!edit" class="btn btn-danger" (click)="setIdSeance(e._id); openAlert(contentAlert)"> Delete </button> &nbsp; &nbsp;
+            <!--<button *ngIf="edit" class="btn btn-success" style="width: 80px ;"> Confirm </button> &nbsp; &nbsp;-->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--Notes-->
+  <div *ngIf="!showaddevent" class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Starts At</th>
+          <th>Ends At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of notes">
+          <td *ngIf="!edit">{{n.title}}</td>
+          <td *ngIf="!edit">{{n.start}}</td>
+          <td *ngIf="!edit">{{n.end}}</td>
+          <td>
+            <button *ngIf="!edit" class="btn btn-danger" (click)="setIdNote(n._id); openNoteAlert(contentNoteAlert)"> Delete </button> &nbsp; &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--Events-->
+  <div *ngIf="showlistevents" class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Starts At</th>
+          <th>Ends At</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of listEvent">
+          <td>{{n.title}}</td>
+          <td>{{n.start}}</td>
+          <td>{{n.end}}</td>
+          <td>{{n.description}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="setIdEvenement(n._id); openEvenementAlert(contentEvenementAlert)"> Delete </button> &nbsp; &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--AddEvent-->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Event</h4>
+      <a href="/home/calendar">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" ></button>
+      </a>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <select type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.title.errors }">
+            <option value="COURS" class="form-control" id="option">COURS</option>
+            <option value="TD" class="form-control" id="option">TD</option>
+            <option value="TP" class="form-control" id="option">TP</option>
+            <option value="ATELIER" class="form-control" id="option">ATELIER</option>
+            <option value="OTHER" class="form-control" id="option">OTHER</option>
+          </select>
+          <div *ngIf="submitted && c.title.errors" class="invalid-feedback">
+            <div *ngIf="c.title.errors.required"> Title is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="start">Start At</label>
+          <input type="datetime-local" formControlName="start" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.start.errors }"/>
+          <div *ngIf="submitted && c.start.errors" class="invalid-feedback">
+            <div *ngIf="c.start.errors.required"> Start Time is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="end">End At</label>
+          <input type="datetime-local" formControlName="end" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.end.errors }"/>
+          <div *ngIf="submitted && c.end.errors" class="invalid-feedback">
+            <div *ngIf="c.end.errors.required"> End Time is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="matiere">Matter</label>
+          <select type="text" formControlName="matiere" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.matiere.errors }">
+            <option *ngFor="let m of matieres" value="{{m._id}}" class="form-control" id="option" >{{m.nom}}</option>
+          </select>
+          <div *ngIf="submitted && c.matiere.errors" class="invalid-feedback">
+            <div *ngIf="c.matiere.errors.required"> Matter is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="enseignant">Teacher</label>
+          <select type="text" formControlName="enseignant" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.enseignant.errors }">
+            <option *ngFor="let e of enseignants" value="{{e._id}}" class="form-control" id="option" >{{e.nom}} {{e.prenom}}</option>
+          </select>
+          <div *ngIf="submitted && c.enseignant.errors" class="invalid-feedback">
+            <div *ngIf="c.enseignant.errors.required"> Teacher is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="salle">Schoolroom</label>
+          <select type="text" formControlName="salle" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.salle.errors }">
+            <option *ngFor="let s of salles" value="{{s._id}}" class="form-control" id="option" >{{s.bloc}}{{s.etage}}{{s.numero}}</option>
+          </select>
+          <div *ngIf="submitted && c.salle.errors" class="invalid-feedback">
+            <div *ngIf="c.salle.errors.required"> Schoolroom is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="classs">Class</label>
+          <select type="text" formControlName="classs" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.classs.errors }">
+            <option *ngFor="let c of classes" value="{{c._id}}" class="form-control" id="option" >{{c.nom}}</option>
+          </select>
+          <div *ngIf="submitted && c.classs.errors" class="invalid-feedback">
+            <div *ngIf="c.classs.errors.required"> Schoolroom is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-dark">Add</button>
+          <a class="btn btn-link" class="btn btn-default" href="/home/calendar" (click)="modal.dismiss('Cross click')">Cancel</a>
+        </div>
+        <div [hidden]="hidemsg" class="alert alert-success"><p>{{msg}}</p></div>
+      </form>
+    </div>
+  </ng-template>
+  <!--AddNote-->
+  <ng-template #contentNote let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Note</h4>
+      <a href="/home/calendar">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" ></button>
+      </a>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formNote" (ngSubmit)="onNote()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && n.title.errors }"/>
+          <div *ngIf="submitted && n.title.errors" class="invalid-feedback">
+            <div *ngIf="n.title.errors.required"> Title is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="start">Start At</label>
+          <input type="datetime-local" formControlName="start" class="form-control" [ngClass]="{ 'is-invalid': submitted && n.start.errors }"/>
+          <div *ngIf="submitted && n.start.errors" class="invalid-feedback">
+            <div *ngIf="n.start.errors.required"> Start Time is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="end">End At</label>
+          <input type="datetime-local" formControlName="end" class="form-control" [ngClass]="{ 'is-invalid': submitted && n.end.errors }"/>
+          <div *ngIf="submitted && n.end.errors" class="invalid-feedback">
+            <div *ngIf="n.end.errors.required"> End Time is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && n.description.errors }"/>
+          <div *ngIf="submitted && n.description.errors" class="invalid-feedback">
+            <div *ngIf="n.description.errors.required"> Description is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-dark">Add</button>
+          <a class="btn btn-link" class="btn btn-default" href="/home/calendar" (click)="modal.dismiss('Cross click')">Cancel</a>
+        </div>
+        <div [hidden]="hidemsg" class="alert alert-success"><p>{{msg}}</p></div>
+      </form>
+    </div>
+  </ng-template>
+  <!--DeleteEvent-->
+  <ng-template #contentAlert let-modal>
+    <div class="modal-header">
+      <h5 style="color: black; text-align: center;" class="modal-title" id="modal-basic-title">Are You Sur to delete this Seance ?</h5>
+      <a href="/home/calendar">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </a>
+    </div>
+    <div class="modal-body" >
+      <form>
+        <div class="form-group" style="align-items: center;">
+          <a style="color: red;" href="/home/calendar" class="btn btn-default" (click)="deleteSeance(); modal.dismiss('Cross click')">Confirm</a>
+          <a style="color: green;" class="btn btn-link" class="btn btn-default" href="/home/calendar" (click)="modal.dismiss('Cross click')">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+  <!--DeleteNote-->
+  <ng-template #contentNoteAlert let-modal>
+    <div class="modal-header">
+      <h5 style="color: black; text-align: center;" class="modal-title" id="modal-basic-title">Are You Sur to delete this Note ?</h5>
+      <a href="/home/calendar">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </a>
+    </div>
+    <div class="modal-body" >
+      <form>
+        <div class="form-group" style="align-items: center;">
+          <a style="color: red;" href="/home/calendar" class="btn btn-default" (click)="deleteNote(); modal.dismiss('Cross click')">Confirm</a>
+          <a style="color: green;" class="btn btn-link" class="btn btn-default" href="/home/calendar" (click)="modal.dismiss('Cross click')">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+  <!--DeleteEvenement-->
+  <ng-template #contentEvenementAlert let-modal>
+    <div class="modal-header">
+      <h5 style="color: black; text-align: center;" class="modal-title" id="modal-basic-title">Are You Sur to delete this Event ?</h5>
+      <a href="/home/calendar">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </a>
+    </div>
+    <div class="modal-body" >
+      <form>
+        <div class="form-group" style="align-items: center;">
+          <a style="color: red;" href="/home/calendar" class="btn btn-default" (click)="deleteEvenement(); modal.dismiss('Cross click')">Confirm</a>
+          <a style="color: green;" class="btn btn-link" class="btn btn-default" href="/home/calendar" (click)="modal.dismiss('Cross click')">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</ion-content>

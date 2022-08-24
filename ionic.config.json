@@ -1,0 +1,7 @@
+{
+  "name": "STUDENT_HUB_MOBILE",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

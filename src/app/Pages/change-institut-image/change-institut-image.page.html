@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Change Institut Image</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile" >
+    <div class="container1">
+      <div>
+          <div *ngIf="user">
+            <div class="picture-container">
+              <div class="picture">
+                <img src="http://localhost:9091/User/{{ user.institutImage }}" class="picture-src" id="wizardPicturePreview" title=""/>
+                <input type="file"  (change)="onFileSelected($event)"  name="file" id="wizard-picture" aria-invalid="false" class="valid" accept="image/*" />
+              </div>
+              <h6>Choose Picture</h6>
+            </div>
+            <button type="submit" (click)="uploadInstitutImage()" class="fill">Update</button>
+            <div class="alert alert-success" [hidden]="showmsg"  style=" width: 400px; margin-left: 0px; text-align: center; border-radius: 15px; margin-top: 40px;">
+              {{ msg }}
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</ion-content>

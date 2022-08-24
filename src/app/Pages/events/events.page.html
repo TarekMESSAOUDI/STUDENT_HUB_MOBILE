@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Events</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--Recherche-->
+  <div class="event-cover">
+    <div class="search__container">
+      <input type="text" #myInput [(ngModel)]="titre" (input)="SearchEventByTitre()" class="search__input" placeholder="Search …" />
+    </div>
+  </div>
+  <!--Add-->
+  <button  class="pulse" style="margin-left:10%" [hidden]="isOpened" (click)="toggle()">Create Your Own Event</button>
+  <div [style.display]="style1" class="event-slider6">
+    <div class="container">
+      <div class="main-card" >
+        <div class="cards"  >
+          <div class="card" style="width: 60%; height: 550px; margin-left: -4%; margin-bottom: 0%;" >
+            <i class="fa-regular fa-circle-xmark" style="color: #03C1AD; cursor: pointer;" [hidden]="!isOpened" (click)="closeNote()"></i>
+            <a href="/home/events" [hidden]="!isOpened" (click)="closeNote()" style="margin-top: 15px;margin-left:15px; font-size: x-large;color: black;">
+              <i class="fa-solid fa-xmark" ></i>
+            </a>
+            <h5 style="text-align: center; margin-top: 0%;">Create Your Own Event !</h5>
+            <br>
+            <form>
+              <input [hidden]="hideform" style="width: 80%; margin-left: 10%;" class="form-control"  type="text" name="title" placeholder="Title" [(ngModel)]="event.title" required #title="ngModel">
+              <br>
+              <input [hidden]="hideform" style="width: 80%; margin-left: 10%;" class="form-control"  type="datetime-local" name="start" [(ngModel)]="event.start" required #start="ngModel">
+              <br>
+              <input [hidden]="hideform" style="width: 80%; margin-left: 10%;" class="form-control"  type="datetime-local" name="end" [(ngModel)]="event.end" required #end="ngModel">
+              <br>
+              <textarea [hidden]="hideform" style="width: 80%; margin-left: 10%;" class="form-control"  type="text" name="description" placeholder="Description" cols="30" rows="5" [(ngModel)]="event.description" required #description="ngModel"></textarea>
+              <br>
+              <input [hidden]="hideimage" style="width: 80%; margin-left: 10%; margin-bottom: 30px;" class="form-control" type="file" name="image" (change)="onFileSelected($event)" accept=".jpeg, .png, .jpg" />
+              <button class="btn btn-primary" style="margin-left: 30%; margin-top: 1px;" (click)="addEvent(event)" [disabled]="title.invalid || description.invalid">Next</button>
+              <a routerLink="/home/events" href="/home" >
+                <input [hidden]="hideimage" class="btn btn-primary" style="margin-left: 45%; margin-top: 15px;" type="submit" (click)="addImage()" value="Add event" />
+              </a>
+              <div class="alert alert-success" [hidden]="showmsg" style=" width: 400px; margin-left: 28%; text-align: center; border-radius: 15px; margin-top: 40px;">
+                {{ msg }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Events-->
+  <div class="event-slider5">
+    <h4 style="text-align: center;">Here Is {{nEvents}} Events</h4>
+    <div class="container" >
+      <div class="row">
+        <div  *ngFor="let events of ListEvent; let i of index" >
+          <div class="main-card" style="width: 110%;" >
+            <div class="cards"  >
+              <div class="card" style="width: 700px; height: 750px; margin-left: -10px;"  >
+                <div class="content">
+                  <li style="list-style-type: none;">
+                    <img src="http://localhost:9091/User/{{ events.user.profileImage }}" style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid #03c1ad; display: inline;" alt=""/>
+                    <a class="nav-link" style="font-weight: bold; display: inline; color: black; ">
+                      <i class="ion-md-power"></i> {{events.user.nom}} {{events.user.prenom}}
+                    </a>
+                    <a (click)="openalert(contentalert); setEventId(events._id)" [hidden]="hideSupp(events.user._id)">
+                      <fa-icon style="color: red;" [icon]="faTrash"  class="material-icons"></fa-icon>
+                    </a>
+                    <br>
+                    <br>
+                    <small>Published on : {{events.date}}</small>
+                    <br>
+                    <small>Start At : {{events.start}}</small>
+                    <br>
+                    <small>End At : {{events.end}}</small>
+                  </li>
+                  <div class="img" style="border:2px red !important;">
+                    <img src="http://localhost:9091/Event/{{ events.image }}" style="width: 250px;height: 150px;" alt="Event Picture" (click)="setEventId(events._id)" routerLink="/home/events/event" />
+                  </div>
+                  <div class="details">
+                    <div class="name" style="hyphens: none;">{{events.title}}</div>
+                  </div>
+                  <br>
+                  <p style="width: 80%; height: 90px;">{{events.description}}</p>
+                  <br>
+                  <a style="color: #03C1AD;  margin-left: 60%; margin-top: 150px; margin-bottom: -45px;">
+                    <p style="color: #03c1ad;"> {{events.nombreCommentaire}} Comments </p>
+                  </a>
+                  <p style="color: #03C1AD; margin-left: -72%;">{{events.like}} Like</p>
+                  <br>
+                  <br>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Delete-->
+<ng-template #contentalert let-modal>
+  <div class="modal-header">
+    <h5 style="color: black; text-align: center;" class="modal-title" id="modal-basic-title">Are You Sur to delete this Event ?</h5>
+    <a href="/home/events">
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </a>
+  </div>
+  <div class="modal-body" >
+    <form>
+      <div class="form-group" style="align-items: center;">
+        <a style="color: red;" href="/home/events" class="btn btn-default" (click)="deleteEvent(); modal.dismiss('Cross click')">Confirm</a>
+        <a style="color: green;" class="btn btn-link" class="btn btn-default" href="/home/events" (click)="modal.dismiss('Cross click')">Cancel</a>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+
+
+</ion-content>

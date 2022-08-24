@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Authentification</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bg"></div>
+  <div style="position: relative;" class="wrapper">
+    <div class="headline">
+      <h1>Login</h1>
+    </div>
+    <form name="user" #u="ngForm" (ngSubmit)="signIn()">
+      <div class="signup">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Login (N° CIN)" #cin="ngModel" name="cin" ngModel [(ngModel)]="user.cin" required/>
+          <div class="alert alert-danger" *ngIf="cin.invalid && cin.touched" style="text-align: center; width: 88%; margin-left: 6%">
+            CIN is a Required Field !
+          </div>
+        </div>
+        <div class="form-group">
+          <input  matInput [type]="hide ? 'password' : 'text'" class="form-control" placeholder="Mot de Pass" #mdp="ngModel" name="mdp" ngModel [(ngModel)]="user.mdp" required />
+          <fa-icon [icon]="faEye" style="display: flex;float: right; transform: translateY(-250%);margin-right: 5%;cursor: pointer; color: #03C1AD; font-size: medium;" class="material-icons" matSuffix (click)="hide = !hide" >{{ hide ? "Show" : "Hide" }}</fa-icon>
+          <div class="alert alert-danger" *ngIf="mdp.invalid && mdp.touched" style="text-align: center; width: 88%; margin-left: 6%">
+            Required Field !
+          </div>
+        </div>
+        <div class="forget-password">
+          <input type="checkbox" id="checkbox" #regle="ngModel" name="regle" ngModel required/>
+          <label for="checkbox" style="font-size: smaller; margin-right: 45px;">I accept
+            <a href="/home/login/confidentialite" style="color: dodgerblue; font-size: smaller;"> the privacy rules</a>
+          </label>
+        </div>
+        <a href="/home/login/forgotpassword" style="text-align: center; margin-left: 28% ;">Forget password?</a>
+        <button [disabled]="u.invalid" href="#" type="submit" class="btn" (click)="signIn()">LOGIN</button>
+        <div [hidden]="hideMsg" class="alert alert-danger" style="width: 88%; margin-left: 6%; text-align: center; border-radius: 15px;">
+          {{ msg }}
+        </div>
+        <div class="account-exist" style="font-size: smaller;">
+          If it comes to the problems, you can visit the <a href="/home/howitwork">help Center</a>
+        </div>
+        <div class="account-exist"></div>
+      </div>
+    </form>
+  </div>
+</ion-content>

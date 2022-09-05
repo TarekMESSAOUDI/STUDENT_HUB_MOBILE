@@ -5,216 +5,218 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home/university"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="container">
-  <button *ngIf="showdel" class="btn btn-secondary" (click)="open(content)">New Document</button>
-  <br>
-  <br>
-  <div class="search-wrapper">
-    <input type="text" #myInput [(ngModel)]="titre" (input)="SearchDocByNom()" class="search-input" placeholder="Search …" />
-    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
-      <defs></defs>
-      <circle cx="11" cy="11" r="8"></circle>
-      <path d="M21 21l-4.35-4.35"></path>
-    </svg>
-  </div>
-  <div class="cards-wrapper">
-    <a (click)="getCoursByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #03C1AD;"><i class="fa-solid fa-folder-open" style="color: #03C1AD;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">COURS</i></div>
-    </a>
-    <a (click)="getTdByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #F44E4E;"><i class="fa-solid fa-folder-open"  style="color: #F44E4E;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">TD</i></div>
-    </a>
-    <a (click)="getTpByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #5A54FF;" ><i class="fa-solid fa-folder-open" style="color: #5A54FF;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">TP</i></div>
-    </a>
-    <a (click)="getAtelierByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #2F83A8;"><i class="fa-solid fa-folder-open"  style="color: #2F83A8;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">ATELIER</i></div>
-    </a>
-  </div>
-
-  <div class="cards-wrapper">
-    <a (click)="getExamenByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #03c133;"><i class="fa-solid fa-folder-open" style="color: #03c133;;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">EXAMEN</i></div>
-    </a>
-    <a (click)="getExamenByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #d8e617;"><i class="fa-solid fa-folder-open"  style="color: #d8e617;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">SERIES</i></div>
-    </a>
-    <a (click)="getAutreByCategorieAndMatiereId()">
-      <div class="card" style="border: 1px solid #434346;" ><i class="fa-solid fa-folder-open" style="color: #434346;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">Autre</i></div>
-    </a>
-  </div>
-
-  <br>
-  <br>
-  <!--Cours-->
-  <div *ngFor="let c of courses" [hidden]="hidecours">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--TD-->
-  <div *ngFor="let c of courses" [hidden]="hidetd">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--TP-->
-  <div *ngFor="let c of courses" [hidden]="hidetp">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--ATELIER-->
-  <div *ngFor="let c of courses" [hidden]="hideatelier">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--EXAMEN-->
-  <div *ngFor="let c of courses" [hidden]="hideexamen">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--SERIE-->
-  <div *ngFor="let c of courses" [hidden]="hideserie">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--AUTRE-->
-  <div *ngFor="let c of courses" [hidden]="hideserie">
-    <ul class="list-group">
-      <li class="list-group-item">{{c.nom}}
-        <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
-          <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
-        </a>
-        <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
-          <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
-        </a>
-      </li>
-      <br>
-    </ul>
-  </div>
-
-  <!--Add-->
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add Document</h4>
-     <a href="/home/documents-scolaire">
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" ></button>
-    </a>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="nom">Doc</label>
-        <input type="file" name="file" (change)="onFileSelected($event)" class="valid"/>
-      </div>
-      <div class="form-group">
-        <label for="categorie">Categorie</label>
-        <select id="sujet" type="text"  formControlName="categorie" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.categorie.errors }">
-          <option value="COURS" class="form-control" id="option">COURS</option>
-          <option value="TD" class="form-control" id="option">TD</option>
-          <option value="TP" class="form-control" id="option">TP</option>
-          <option value="ATELIER" class="form-control" id="option">ATELIER</option>
-          <option value="EXAMEN" class="form-control" id="option">EXAMEN</option>
-          <option value="SERIE" class="form-control" id="option">SERIE</option>
-          <option value="AUTRE" class="form-control" id="option">AUTRE</option>
-        </select>
-        <div *ngIf="submitted && c.categorie.errors" class="invalid-feedback">
-          <div *ngIf="c.categories.errors.required"> Categorie is required</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-outline-dark">Add</button>
-        <a class="btn btn-link" class="btn btn-default" href="/home/documents-scolaire" (click)="modal.dismiss('Cross click')">Cancel</a>
-      </div>
-      <div [hidden]="hidemsg" class="alert alert-success"><p>{{msg}}</p></div>
-    </form>
-  </div>
-</ng-template>
-
-  <!--Delete-->
-  <ng-template #contentalert let-modal>
-    <div class="modal-header">
-      <h5 style="color: black; text-align: center;" class="modal-title" id="modal-basic-title">Are You Sur to delete this Document ?</h5>
-      <a href="/home/documents-scolaire">
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <button style="width: 60%; margin-left: 20%;" *ngIf="showdel" class="btn btn-secondary" (click)="open(content)">New Document</button>
+    <br>
+    <br>
+    <div class="search-wrapper">
+      <input type="text" #myInput [(ngModel)]="titre" (input)="SearchDocByNom()" class="search-input" placeholder="Search …" />
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
+        <defs></defs>
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="M21 21l-4.35-4.35"></path>
+      </svg>
+    </div>
+    <br>
+    <div class="cards-wrapper">
+      <a (click)="getCoursByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #03C1AD;"><i class="fa-solid fa-folder-open" style="color: #03C1AD;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">COURS</i></div>
       </a>
     </div>
-    <div class="modal-body" >
-      <form>
-        <div class="form-group" style="align-items: center;">
-          <a style="color: red;" href="/home/documents-scolaire" class="btn btn-default" (click)="deleteDoc(); modal.dismiss('Cross click')">Confirm</a>
-          <a style="color: green;" class="btn btn-link" class="btn btn-default" href="/home/documents-scolaire" (click)="modal.dismiss('Cross click')">Cancel</a>
+    <div class="cards-wrapper" style="margin-top: -100px ;">
+      <a (click)="getTdByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #F44E4E;"><i class="fa-solid fa-folder-open"  style="color: #F44E4E;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">TD</i></div>
+      </a>
+    </div>
+    <div class="cards-wrapper" style="margin-top: -100px ;">
+      <a (click)="getTpByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #5A54FF;" ><i class="fa-solid fa-folder-open" style="color: #5A54FF;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">TP</i></div>
+      </a>
+    </div>
+    <div class="cards-wrapper" style="margin-top: -100px ;">
+      <a (click)="getAtelierByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #2F83A8;"><i class="fa-solid fa-folder-open"  style="color: #2F83A8;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">ATELIER</i></div>
+      </a>
+    </div>
+    <div class="cards-wrapper" style="margin-top: -100px ;">
+      <a (click)="getExamenByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #03c133;"><i class="fa-solid fa-folder-open" style="color: #03c133;;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">EXAMEN</i></div>
+      </a>
+    </div>
+    <div class="cards-wrapper" style="margin-top: -100px ;">
+      <a (click)="getExamenByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #d8e617;"><i class="fa-solid fa-folder-open"  style="color: #d8e617;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">SERIES</i></div>
+      </a>
+    </div>
+    <div class="cards-wrapper" style="margin-top: -100px ; margin-bottom: -100px ;" >
+      <a (click)="getAutreByCategorieAndMatiereId()">
+        <div class="card" style="border: 1px solid #434346;" ><i class="fa-solid fa-folder-open" style="color: #434346;width: 40px; height: auto;margin-left: 30px;"></i><i class="certif">Autre</i></div>
+      </a>
+    </div>
+    <!--Cours-->
+    <div *ngFor="let c of courses" [hidden]="hidecours">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+
+    <!--TD-->
+    <div *ngFor="let c of courses" [hidden]="hidetd">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+
+    <!--TP-->
+    <div *ngFor="let c of courses" [hidden]="hidetp">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+
+    <!--ATELIER-->
+    <div *ngFor="let c of courses" [hidden]="hideatelier">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+
+    <!--EXAMEN-->
+    <div *ngFor="let c of courses" [hidden]="hideexamen">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+
+    <!--SERIE-->
+    <div *ngFor="let c of courses" [hidden]="hideserie">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+
+    <!--AUTRE-->
+    <div *ngFor="let c of courses" [hidden]="hideserie">
+      <ul class="list-group">
+        <li class="list-group-item">{{c.nom}}
+          <a target="_blank" href="http://localhost:9091/Document/{{ c.nom }}">
+            <fa-icon style="color: #5A54FF; font-size: small;" [icon]="faDownload"  class="material-icons"></fa-icon>
+          </a>
+          <a *ngIf="showdel" (click)="openalert(contentalert); setDocId(c._id)">&nbsp; &nbsp;
+            <fa-icon style="color: red;font-size: small;" [icon]="faTrash"  class="material-icons"></fa-icon>
+          </a>
+        </li>
+        <br>
+      </ul>
+    </div>
+    <!--Add-->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Document</h4>
+      <a href="/home/documents-scolaire">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')" ></button>
+      </a>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nom">Doc</label>
+          <input type="file" name="file" (change)="onFileSelected($event)" class="valid"/>
         </div>
+        <div class="form-group">
+          <label for="categorie">Categorie</label>
+          <select id="sujet" type="text"  formControlName="categorie" class="form-control" [ngClass]="{ 'is-invalid': submitted && c.categorie.errors }">
+            <option value="COURS" class="form-control" id="option">COURS</option>
+            <option value="TD" class="form-control" id="option">TD</option>
+            <option value="TP" class="form-control" id="option">TP</option>
+            <option value="ATELIER" class="form-control" id="option">ATELIER</option>
+            <option value="EXAMEN" class="form-control" id="option">EXAMEN</option>
+            <option value="SERIE" class="form-control" id="option">SERIE</option>
+            <option value="AUTRE" class="form-control" id="option">AUTRE</option>
+          </select>
+          <div *ngIf="submitted && c.categorie.errors" class="invalid-feedback">
+            <div *ngIf="c.categories.errors.required"> Categorie is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-dark">Add</button>
+          <a class="btn btn-link" class="btn btn-default" href="/home/documents-scolaire" (click)="modal.dismiss('Cross click')">Cancel</a>
+        </div>
+        <div [hidden]="hidemsg" class="alert alert-success"><p>{{msg}}</p></div>
       </form>
     </div>
   </ng-template>
-</div>
 
-
-
-
+    <!--Delete-->
+    <ng-template #contentalert let-modal>
+      <div class="modal-header">
+        <h5 style="color: black; text-align: center;" class="modal-title" id="modal-basic-title">Are You Sur to delete this Document ?</h5>
+        <a href="/home/documents-scolaire">
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </a>
+      </div>
+      <div class="modal-body" >
+        <form>
+          <div class="form-group" style="align-items: center;">
+            <a style="color: red;" href="/home/documents-scolaire" class="btn btn-default" (click)="deleteDoc(); modal.dismiss('Cross click')">Confirm</a>
+            <a style="color: green;" class="btn btn-link" class="btn btn-default" href="/home/documents-scolaire" (click)="modal.dismiss('Cross click')">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+  </div>
 </ion-content>

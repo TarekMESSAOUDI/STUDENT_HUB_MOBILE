@@ -52,30 +52,34 @@
         <li class="nav-item" routerLinkActive="active" routerLink="/home/gestion-event" style="width: 180px; margin: 15px; height: 40px;">
           <a href="/home/gestion-event">My Events</a>
         </li>
+
         <div [hidden]="hideuniversities" ngbDropdown class="d-inline-block">
           <li [hidden]="hideuniversities" class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" ngbDropdownToggle>
             <a>Universities</a>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="border-radius: 30px; border: solid #03c1ad;width: 250px">
-              <button ngbDropdownItem >
-                <a routerLink="home/universities" routerLinkActive="active" > All Universities </a>
+              <button ngbDropdownItem style="align-items: center;">
+                <a href="home/espace-admin" style="color: black; text-align: center;" > All Universities </a>
               </button>
               <hr>
-              <button ngbDropdownItem *ngFor="let un of listUniversite"><a (click)="setIdUniversite(un._id); getUniversiteById()" href="home/university" > {{un.nom}} </a></button>
+              <button ngbDropdownItem *ngFor="let un of listUniversite">
+                <a (click)="setIdUniversite(un._id); getUniversiteById()" href="home/university" style="color: black; text-align: center;"> {{un.nom}} </a>
+              </button>
             </div>
           </li>
         </div>
-        <li [hidden]="hidefiliere" class="nav-item" routerLink="home/university" routerLinkActive="active" style="width: 180px; margin: 15px; height: 40px;">
+
+        <li [hidden]="hidefiliere" class="nav-item" style="width: 180px; margin: 15px; height: 40px;">
           <a href="home/university">My {{ user.nom }}</a>
         </li>
         <div ngbDropdown class="d-inline-block">
           <li class="nav-item" style="width: 180px; margin: 15px; height: 40px;" id="dropdownBasic1" ngbDropdownToggle>
             <a>Settings</a>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="border-radius: 30px; border: solid #03c1ad;width: 250px">
-              <button ngbDropdownItem><a href="home/settings">Update Profile</a></button>
-              <button ngbDropdownItem><a href="home/changeMdp">Change Password</a></button>
-              <button ngbDropdownItem><a href="home/changePImage">Update Profile Image</a></button>
-              <button ngbDropdownItem><a href="home/changeCImage">Update Cover Image</a></button>
-              <button [hidden]="hideinstitutimage" ngbDropdownItem><a href="home/changeIImage">Update Institut Image</a></button>
+              <button ngbDropdownItem><a href="home/settings" style="color: black;">Update Profile</a></button>
+              <button ngbDropdownItem><a href="home/changeMdp" style="color: black;">Change Password</a></button>
+              <button ngbDropdownItem><a href="home/changePImage" style="color: black;">Update Profile Image</a></button>
+              <button ngbDropdownItem><a href="home/changeCImage" style="color: black;">Update Cover Image</a></button>
+              <button [hidden]="hideinstitutimage" ngbDropdownItem><a href="home/changeIImage" style="color: black;">Update Institut Image</a></button>
             </div>
           </li>
         </div>
@@ -86,7 +90,7 @@
     </div>
   </div>
   <div style=" margin-top: -95px; margin-left: 80%;">
-    <a routerLink="/home"><img src="../../../../assets/images/logo.png" alt="Pikoro" style="width: 45px; height: 45px; margin-right: 20px;"/></a>
+    <a href="home"><img src="../../../../assets/images/logo.png" alt="Pikoro" style="width: 45px; height: 45px; margin-right: 20px;"/></a>
   </div>
   <br>
   <br>

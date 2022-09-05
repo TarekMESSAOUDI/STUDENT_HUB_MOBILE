@@ -38,7 +38,7 @@
           </label>
         </div>
         <a href="/home/login/forgotpassword" style="text-align: center; margin-left: 28% ;">Forget password?</a>
-        <button [disabled]="u.invalid" href="#" type="submit" class="btn" (click)="signIn()">LOGIN</button>
+        <button [disabled]="u.invalid" href="home" type="submit" class="btn" (click)="signIn()">LOGIN</button>
         <div [hidden]="hideMsg" class="alert alert-danger" style="width: 88%; margin-left: 6%; text-align: center; border-radius: 15px;">
           {{ msg }}
         </div>

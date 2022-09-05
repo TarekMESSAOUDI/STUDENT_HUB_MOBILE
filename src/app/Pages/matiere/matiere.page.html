@@ -5,22 +5,15 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home/university"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-<div class="container">
-    <form>
-      <button  type="button" class="btn btn-secondary" onclick="history.back()">
-        <fa-icon [icon]="faUndo"  class="material-icons"></fa-icon> Go back!
-      </button>
-    </form>
-    <br>
+  <div class="container">
     <div class="header">
-      <h1>You have {{nMatiere}} Matter</h1>
+      <h3>You have {{nMatiere}} Matter</h3>
       <br>
       <div class="search-wrapper">
         <input type="text" #myInput [(ngModel)]="nom" (input)="SearchMatiere()" class="search-input" placeholder="Search …" />
@@ -38,29 +31,30 @@
       </div>
     </div>
     <br>
-
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Coeficient</th>
-          <th>Documents</th>
-          <th *ngIf="showdel">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let n of listMatiere">
-          <td>{{n.nom}}</td>
-          <td>{{n.coef}}</td>
-          <td>
-            <a (click)="setIdMatiere(n._id)" href="/home/documents-scolaire">View Documents</a>
-          </td>
-          <td *ngIf="showdel">
-            <button class="btn btn-danger" (click)="openAlert(contentAlert); setIdMatiere(n._id)">Del</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive" style="overflow-x: auto;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Coeficient</th>
+            <th>Documents</th>
+            <th *ngIf="showdel">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let n of listMatiere">
+            <td>{{n.nom}}</td>
+            <td>{{n.coef}}</td>
+            <td>
+              <a href="/home/documents-scolaire" (click)="setIdMatiere(n._id)">View Documents</a>
+            </td>
+            <td *ngIf="showdel">
+              <button class="btn btn-danger" (click)="openAlert(contentAlert); setIdMatiere(n._id)">Del</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!--Add-->

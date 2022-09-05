@@ -20,17 +20,12 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { HomePage } from './Pages/home/home.page';
 import { HeaderPage } from './Pages/header/header.page';
 import { FooterPage } from './Pages/footer/footer.page';
-import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import resourceTimelinePlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction';
 import { EventsPage } from './Pages/events/events.page';
 import { ProfilePage } from './Pages/profile/profile.page';
 import { AuthentificationPage } from './Pages/authentification/authentification.page';
 import { BlogPage } from './Pages/blog/blog.page';
 import { BlogsPage } from './Pages/blogs/blogs.page';
 import { CalendarPage } from './Pages/calendar/calendar.page';
-import { CalendrierUniversitairePageModule } from './Pages/calendrier-universitaire/calendrier-universitaire.module';
 import { CalendrierUniversitairePage } from './Pages/calendrier-universitaire/calendrier-universitaire.page';
 import { ChangeCoverImagePage } from './Pages/change-cover-image/change-cover-image.page';
 import { ChangeInstitutImagePage } from './Pages/change-institut-image/change-institut-image.page';
@@ -61,12 +56,14 @@ import { TableEnseignantPage } from './Pages/table-enseignant/table-enseignant.p
 import { TableEtudiantPage } from './Pages/table-etudiant/table-etudiant.page';
 import { UniversityPage } from './Pages/university/university.page';
 import { UpdateMdpPage } from './Pages/update-mdp/update-mdp.page';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 
-/*FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
-  interactionPlugin,
-  resourceTimelinePlugin,
-]);*/
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -127,7 +124,7 @@ import { UpdateMdpPage } from './Pages/update-mdp/update-mdp.page';
     FontAwesomeModule,
     DragDropModule,
     QRCodeModule,
-    //FullCalendarModule
+    FullCalendarModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

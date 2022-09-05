@@ -13,14 +13,8 @@
 <ion-content>
 
 <div class="container">
-  <form>
-    <button  type="button" class="btn btn-secondary" onclick="history.back()">
-      <fa-icon [icon]="faUndo"  class="material-icons"></fa-icon> Go back!
-    </button>
-  </form>
-  <br>
   <div class="header">
-    <h1>You have {{nSalle}} Schoolrooms</h1>
+    <h3>You have {{nSalle}} Schoolrooms</h3>
     <br>
     <div class="search-wrapper">
       <input type="text" #myInput [(ngModel)]="nom" (input)="SearchSalle()" class="search-input" placeholder="Search …" />
@@ -39,9 +33,9 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-md" *ngFor="let s of listSalle">
+    <div class="col-md-6" *ngFor="let s of listSalle">
         <div class="list-group">
-          <button style="width: 150px; text-align: center; border-radius: 15px;" type="button" class="list-group-item list-group-item-action active">
+          <button style="width: 80%; text-align: center;  align-items: center; border-radius: 15px; margin-left: 10%;" type="button" class="list-group-item list-group-item-action active">
             <a (click)="openAlert(contentAlert); setIdSalle(s._id)">
               <fa-icon style="color: red;" [icon]="faTrash"  class="material-icons"></fa-icon>&nbsp; &nbsp;
             </a>

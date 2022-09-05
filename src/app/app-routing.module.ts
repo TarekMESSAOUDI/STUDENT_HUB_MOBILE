@@ -38,8 +38,8 @@ import { TableEnseignantPage } from './Pages/table-enseignant/table-enseignant.p
 import { TableEtudiantPage } from './Pages/table-etudiant/table-etudiant.page';
 import { UniversityPage } from './Pages/university/university.page';
 import { UpdateMdpPage } from './Pages/update-mdp/update-mdp.page';
-
 import { GuardAdministrateurService } from './Services/GuardAdministrateur/guard-administrateur.service';
+
 import { GuardAdminOrUniversiteService } from './Services/GuardAdminOrUniversite/guard-admin-or-universite.service';
 import { GuardNoAdminServiceService } from './Services/GuardNoAdminService/guard-no-admin-service.service';
 import { GuardVisitorService } from './Services/GuardVisitor/guard-visitor.service';
@@ -59,7 +59,7 @@ const routes: Routes = [
         children: [
           { path: 'profile', component: ProfilePage, canActivate: [GuardVisitorService] },//http://localhost:4200/home/profile/:id
           { path: 'settings', component: ProfileSettingsPage, canActivate: [GuardVisitorService] }, //http://localhost:4200/home/:id/settings
-          { path: 'universities', component: EspaceAdminPage, canActivate: [GuardAdministrateurService] }, //http://localhost:4200/home/profile/:id/admin
+          { path: 'espace-admin', component: EspaceAdminPage, canActivate: [GuardAdministrateurService] }, //http://localhost:4200/home/profile/:id/admin
           { path: 'table-enseignant', component: TableEnseignantPage, canActivate: [GuardAdminOrUniversiteService] }, //http://localhost:4200/home/table-enseignant
           { path: 'table-etudiant', component: TableEtudiantPage, canActivate: [GuardAdminOrUniversiteService] }, //http://localhost:4200/home/table-etudiant
           { path: 'table-club', component: TableClubPage, canActivate: [GuardAdminOrUniversiteService] }, //http://localhost:4200/home/table-club
@@ -78,7 +78,7 @@ const routes: Routes = [
           { path: 'changeCImage', component: ChangeCoverImagePage, canActivate: [GuardVisitorService] },//http://localhost:4200/home/changeCImage
           { path: 'changeIImage', component: ChangeInstitutImagePage, canActivate: [GuardAdminOrUniversiteService] },//http://localhost:4200/home/changeIImage
           { path: 'gestion-event', component: GestionEventPage },//http://localhost:4200/home/gestion-event
-          { path: 'documents-scolaire', component: DocumentsScolairePage, canActivate: [GuardNoAdminServiceService] },//http://localhost:4200/home/documents-scolaire
+          { path: 'documents-scolaire', component: DocumentsScolairePage },//http://localhost:4200/home/documents-scolaire
           { path: 'demande-document', component: DemandeDocumentPage, canActivate: [GuardNoAdminServiceService] },//http://localhost:4200/home/demande-document
           { path: 'calendrier-universitaire', component: CalendrierUniversitairePage, canActivate: [GuardVisitorService] },//http://localhost:4200/home/calendrier-universitaire
         ],

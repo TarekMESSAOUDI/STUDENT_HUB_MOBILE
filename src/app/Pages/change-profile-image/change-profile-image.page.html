@@ -5,7 +5,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home/profile"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,31 +14,29 @@
   <div class="profile" >
     <div class="container1">
       <div>
-          <div *ngIf="user">
-            <div class="picture-container">
-              <div class="picture">
-                <img src="http://localhost:9091/User/{{ user.profileImage }}" class="picture-src" id="wizardPicturePreview" title=""/>
-                <input type="file"   name="file" id="wizard-picture" (change)="onFileSelected($event)" aria-invalid="false" class="valid" accept="image/*" />
-              </div>
-              <h6>Choose Picture</h6>
+        <div *ngIf="user">
+          <div class="picture-container">
+            <div class="picture">
+              <img src="http://localhost:9091/User/{{ user.profileImage }}" class="picture-src" id="wizardPicturePreview" title=""/>
+              <input type="file"   name="file" id="wizard-picture" (change)="onFileSelected($event)" aria-invalid="false" class="valid" accept="image/*" />
             </div>
-            <div>
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
-                <defs>
-                  <filter id="goo">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                    <feComposite in="SourceGraphic" in2="goo"/>
-                  </filter>
-                </defs>
-              </svg>
-              </div>
-              <button type="submit" (click)="uploadProfileImage()" class="fill">Update</button>
-          <div class="alert alert-success" [hidden]="showmsg" style=" width: 400px; margin-left: 0px; text-align: center; border-radius: 15px; margin-top: 40px;">
-              {{ msg }}
-            </div>
+            <h6>Choose Picture</h6>
           </div>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+              <defs>
+                <filter id="goo">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                  <feComposite in="SourceGraphic" in2="goo"/>
+                </filter>
+              </defs>
+            </svg>
+          </div>
+          <button type="submit" (click)="uploadProfileImage()" class="fill" style="width: 60%; margin: 20%;">Update</button>
+          <div class="alert alert-success" [hidden]="showmsg" style=" width:90%; margin: 5%; border-radius: 15px;">{{ msg }}</div>
         </div>
+      </div>
     </div>
   </div>
 </ion-content>

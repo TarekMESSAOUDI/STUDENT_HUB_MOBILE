@@ -5,29 +5,25 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home/university"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!--Header-->
-  <div style="display: block;align-items: center;margin-left: 47%;margin-bottom: 20px;">
-    <button style="width: 115px;  margin-right: 13px; margin-bottom: 10px;" (click)="toggleWeekends()" class="btn btn-primary">weekends</button>
-    <button *ngIf="showaddevent" style="width: 115px;margin-bottom: 10px;"  (click)="open(content)" class="btn btn-primary">New Seance</button>
-    <button *ngIf="!showaddevent" style="width: 115px;margin-bottom: 10px;" (click)="openNote(contentNote)" class="btn btn-primary">New Note</button>
+  <div style="display: block;">
+    <button  style="margin-top: 10px; width: 50%; margin-bottom: 10px; margin-left: 25%;" (click)="toggleWeekends()" class="btn btn-primary">weekends</button>
+    <button *ngIf="showaddevent"  style="width: 50%; margin-bottom: 10px; margin-left: 25%;" (click)="open(content)" class="btn btn-primary">New Seance</button>
+    <button *ngIf="!showaddevent" style="width: 50%; margin-bottom: 10px; margin-left: 25%;" (click)="openNote(contentNote)" class="btn btn-primary">New Note</button>
   </div>
   <!--Calendar-->
-  <full-calendar defaultView="dayGridMonth" #calendar deepChangeDetection="true" [options]="calendarOptions"></full-calendar>
+  <full-calendar style="overflow: auto; width: 100%;" defaultView="dayGridMonth" #calendar [options]="calendarOptions"></full-calendar>
   <br>
   <br>
   <!--Events-->
-  <div *ngIf="showaddevent" class="table-responsive">
-  <!-- <button *ngIf="!edit" class="btn btn-primary" (click)="showEditForm()" style="width: 100px;"> Edit </button>
-    <a href="/home/calendar"><button *ngIf="edit" class="btn btn-primary" > Cancel </button></a>
-    <br>
-    <br>-->
-    <table class="table table-bordered">
+  <div *ngIf="showaddevent" class="table-responsive" style="overflow-x: auto;">
+    <table class="table" style="width: 300%;">
       <thead>
         <tr>
           <th>Title</th>
@@ -43,30 +39,22 @@
       <tbody>
         <tr *ngFor="let e of events">
           <td *ngIf="!edit">{{e.title}}</td>
-          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.title">-->
           <td *ngIf="!edit">{{e.start}}</td>
-          <!--<td *ngIf="edit"><input type="datetime-local" [(ngModel)]="e.start">-->
           <td *ngIf="!edit">{{e.end}}</td>
-          <!--<td *ngIf="edit"><input type="datetime-local" [(ngModel)]="e.end">-->
           <td *ngIf="!edit">{{e.matiere.nom}}</td>
-          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.matiere.nom">-->
           <td *ngIf="!edit">{{e.enseignant.nom}} {{e.enseignant.prenom}}</td>
-          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.enseignant.nom">-->
           <td *ngIf="!edit">{{e.salle.bloc}}{{e.salle.etage}}{{e.salle.numero}}</td>
-          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.salle.numero">-->
           <td *ngIf="!edit">{{e.classs.nom}}</td>
-          <!--<td *ngIf="edit"><input type="text" [(ngModel)]="e.classe.nom">-->
           <td>
             <button *ngIf="!edit" class="btn btn-danger" (click)="setIdSeance(e._id); openAlert(contentAlert)"> Delete </button> &nbsp; &nbsp;
-            <!--<button *ngIf="edit" class="btn btn-success" style="width: 80px ;"> Confirm </button> &nbsp; &nbsp;-->
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <!--Notes-->
-  <div *ngIf="!showaddevent" class="table-responsive">
-    <table class="table table-bordered">
+  <div *ngIf="!showaddevent" class="table-responsive" style="overflow-x: auto;">
+    <table class="table">
       <thead>
         <tr>
           <th>Title</th>
@@ -88,8 +76,8 @@
     </table>
   </div>
   <!--Events-->
-  <div *ngIf="showlistevents" class="table-responsive">
-    <table class="table table-bordered">
+  <div *ngIf="showlistevents" class="table-responsive" style="overflow-x: auto;">
+    <table class="table">
       <thead>
         <tr>
           <th>Title</th>

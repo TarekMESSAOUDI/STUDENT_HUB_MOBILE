@@ -3,8 +3,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-//import { FullCalendarComponent } from '@fullcalendar/angular';
-//import { CalendarOptions, formatDate } from '@fullcalendar/core';
+import { CalendarOptions, formatDate, FullCalendarComponent } from '@fullcalendar/angular';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs/operators';
 import { ClassService } from 'src/app/Services/Class/class.service';
@@ -62,14 +61,14 @@ export class CalendarPage implements OnInit {
     this.getEventById();
     this.showListEvents();
 
-    /*const str = formatDate('2018-09-01', {
+    const str = formatDate('2018-09-01', {
       month: 'long',
       year: 'numeric',
       day: 'numeric',
       timeZoneName: 'short',
       timeZone: 'UTC',
       locale: 'tn'
-    });*/
+    });
 
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
@@ -89,155 +88,155 @@ export class CalendarPage implements OnInit {
     });
   }
 
-  //  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
-  /* calendarOptions: CalendarOptions = {
-     //plugins: [timeGridPlugin, listPlugin, interactionPlugin, momentTimezonePlugin],
-     droppable: true,
-     editable: true,
-     eventResizableFromStart: true,
-     nowIndicator: true,
-     timeZone: 'local',
-     navLinks: true,
-     weekNumberCalculation: 'local',
-     weekNumbers: true,
-     weekText: 'W',
-     weekTextLong: 'Week',
-     weekNumberFormat: { week: 'narrow' },
-     weekNumberClassNames: 'a',
-     initialView: 'dayGridMonth',
-     dateClick: this.handleDateClick.bind(this),
-     weekends: true,
-     fixedWeekCount: true,
-     showNonCurrentDates: true,
-     themeSystem: 'bootstrap5',
-     slotEventOverlap: true,
-     slotLabelFormat: {
-       hour: 'numeric',
-       minute: '2-digit',
-       omitZeroMinute: true,
-       meridiem: 'short'
-     },
-     headerToolbar: {
-       start: 'title',
-       center: 'dayGridMonth,timeGridWeek,timeGridDay,listDay',
-       end: 'today prev,next'
-     },
-     navLinkDayClick(date, jsEvent) {
-       console.log('day', date.toISOString());
-       console.log('coords', jsEvent, jsEvent);
-     },
-     navLinkWeekClick(weekStart, jsEvent) {
-       console.log('week start', weekStart.toISOString());
-       console.log('coords', jsEvent, jsEvent);
-     },
-     titleFormat: {
-       month: 'long',
-       year: 'numeric',
-       day: 'numeric',
-       hour: '2-digit',
-       minute: '2-digit',
-       second: '2-digit'
-     },
-     eventTimeFormat: {
-       hour12: false,
-       hour: '2-digit',
-       minute: 'numeric',
+  calendarOptions: CalendarOptions = {
+    //plugins: [timeGridPlugin, listPlugin, interactionPlugin, momentTimezonePlugin],
+    droppable: true,
+    editable: true,
+    eventResizableFromStart: true,
+    nowIndicator: true,
+    timeZone: 'local',
+    navLinks: true,
+    weekNumberCalculation: 'local',
+    weekNumbers: true,
+    weekText: 'W',
+    weekTextLong: 'Week',
+    weekNumberFormat: { week: 'narrow' },
+    weekNumberClassNames: 'a',
+    initialView: 'dayGridMonth',
+    dateClick: this.handleDateClick.bind(this),
+    weekends: true,
+    fixedWeekCount: true,
+    showNonCurrentDates: true,
+    themeSystem: 'bootstrap5',
+    slotEventOverlap: true,
+    slotLabelFormat: {
+      hour: 'numeric',
+      minute: '2-digit',
+      omitZeroMinute: true,
+      meridiem: 'short'
+    },
+    headerToolbar: {
+      start: 'title',
+      center: 'dayGridMonth,timeGridWeek,timeGridDay,listDay',
+      end: 'today prev,next'
+    },
+    navLinkDayClick(date, jsEvent) {
+      console.log('day', date.toISOString());
+      console.log('coords', jsEvent, jsEvent);
+    },
+    navLinkWeekClick(weekStart, jsEvent) {
+      console.log('week start', weekStart.toISOString());
+      console.log('coords', jsEvent, jsEvent);
+    },
+    titleFormat: {
+      month: 'long',
+      year: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    },
+    eventTimeFormat: {
+      hour12: false,
+      hour: '2-digit',
+      minute: 'numeric',
 
-     },
-     buttonText: {
-       today: 'today',
-       month: 'month',
-       week: 'week',
-       day: 'day',
-       list: 'list'
-     },
-     buttonIcons: {
-       prev: 'chevron-left',
-       next: 'chevron-right',
-       prevYear: 'chevrons-left', // double chevron
-       nextYear: 'chevrons-right' // double chevron
-     },
-     customButtons: {
-       myCustomButton: {
-         text: 'custom!',
-         click() {
-           alert('clicked the custom button!');
-         }
-       }
-     },
-     bootstrapFontAwesome: {
-       close: 'fa-times',
-       prev: 'fa-chevron-left',
-       next: 'fa-chevron-right',
-       prevYear: 'fa-angle-double-left',
-       nextYear: 'fa-angle-double-right'
-     },
-     views: {
-       dayGridMonth: {
-         titleFormat: { year: 'numeric', month: '2-digit', day: '2-digit' },
-         timeZone: 'Tunisia',
-       },
-     },
-     endParam: '',
-     eventTextColor: 'black',
-     eventRemove() {
-       this.deleteEvent();
-     },
-     eventSources: [
-       {
-         url: 'http://localhost:9091/Seance/getByIdUniversite/' + sessionStorage.getItem('IdCalendar'),
-         color: 'Aqua',
-         textColor: 'Black',
-         backgroundColor: 'Aqua',
-       },
-       {
-         url: 'http://localhost:9091/Seance/getByIdClass/' + sessionStorage.getItem('IdCalendar'),
-         color: 'Aqua',
-         textColor: 'Black',
-         backgroundColor: 'Aqua',
-       },
-       {
-         url: 'http://localhost:9091/Seance/getByIdEnseignant/' + sessionStorage.getItem('IdCalendar'),
-         color: 'Aqua',
-         textColor: 'Black',
-         backgroundColor: 'Aqua',
-       },
-       {
-         url: 'http://localhost:9091/Note/getNoteById/' + localStorage.getItem('Id'),
-         color: 'Pink',
-         textColor: 'Black',
-         backgroundColor: 'Yellow',
-       },
-       {
-         url: 'http://localhost:9091/Event/getAll',
-         color: 'Green',
-         textColor: 'Black',
-         backgroundColor: 'Lime',
-       },
-     ],
-     eventDidMount(info) {
-       if (info.event.extendedProps.status === 'done') {
+    },
+    buttonText: {
+      today: 'today',
+      month: 'month',
+      week: 'week',
+      day: 'day',
+      list: 'list'
+    },
+    buttonIcons: {
+      prev: 'chevron-left',
+      next: 'chevron-right',
+      prevYear: 'chevrons-left', // double chevron
+      nextYear: 'chevrons-right' // double chevron
+    },
+    customButtons: {
+      myCustomButton: {
+        text: 'custom!',
+        click() {
+          alert('clicked the custom button!');
+        }
+      }
+    },
+    bootstrapFontAwesome: {
+      close: 'fa-times',
+      prev: 'fa-chevron-left',
+      next: 'fa-chevron-right',
+      prevYear: 'fa-angle-double-left',
+      nextYear: 'fa-angle-double-right'
+    },
+    views: {
+      dayGridMonth: {
+        titleFormat: { year: 'numeric', month: '2-digit', day: '2-digit' },
+        timeZone: 'Tunisia',
+      },
+    },
+    endParam: '',
+    eventTextColor: 'black',
+    eventRemove() {
+      this.deleteEvent();
+    },
+    eventSources: [
+      {
+        url: 'http://localhost:9091/Seance/getByIdUniversite/' + sessionStorage.getItem('IdCalendar'),
+        color: 'Aqua',
+        textColor: 'Black',
+        backgroundColor: 'Aqua',
+      },
+      {
+        url: 'http://localhost:9091/Seance/getByIdClass/' + sessionStorage.getItem('IdCalendar'),
+        color: 'Aqua',
+        textColor: 'Black',
+        backgroundColor: 'Aqua',
+      },
+      {
+        url: 'http://localhost:9091/Seance/getByIdEnseignant/' + sessionStorage.getItem('IdCalendar'),
+        color: 'Aqua',
+        textColor: 'Black',
+        backgroundColor: 'Aqua',
+      },
+      {
+        url: 'http://localhost:9091/Note/getNoteById/' + localStorage.getItem('Id'),
+        color: 'Pink',
+        textColor: 'Black',
+        backgroundColor: 'Yellow',
+      },
+      {
+        url: 'http://localhost:9091/Event/getAll',
+        color: 'Green',
+        textColor: 'Black',
+        backgroundColor: 'Lime',
+      },
+    ],
+    eventDidMount(info) {
+      if (info.event.extendedProps.status === 'done') {
 
-         // Change background color of row
-         info.el.style.backgroundColor = 'lime';
-       }
-       if (info.event.extendedProps.status === 'Not Yet') {
+        // Change background color of row
+        info.el.style.backgroundColor = 'lime';
+      }
+      if (info.event.extendedProps.status === 'Not Yet') {
 
-         // Change background color of row
-         info.el.style.backgroundColor = 'yellow';
-       }
-     }
-   };*/
+        // Change background color of row
+        info.el.style.backgroundColor = 'yellow';
+      }
+    }
+  };
 
 
   someMethod() {
-    //const calendarApi = this.calendarComponent.getApi();
-    //calendarApi.next();
+    const calendarApi = this.calendarComponent.getApi();
+    calendarApi.next();
   }
 
   toggleWeekends() {
-    //  this.calendarOptions.weekends = !this.calendarOptions.weekends;
+    this.calendarOptions.weekends = !this.calendarOptions.weekends;
   }
 
   handleDateClick(arg) {

@@ -1,10 +1,10 @@
 .profile {
-  width: 95%;
-  height: 100%;
+  width: 94%;
   background: #f8f8f8;
   box-shadow: 0px 0px 9px rgba(61, 61, 61, 0.28);
   border-radius: 16px;
-  padding: 2%;
+  margin: 3%;
+  padding: 15px 15px 15px 15px;
   position: relative;
 }
 
@@ -14,9 +14,9 @@
   box-sizing: border-box;
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.15);
   border-radius: 21px;
-  width: 95%;
-  padding: 2%;
-  height: 100%;
+  width: 94%;
+  margin: 3%;
+  padding: 15px 15px 15px 15px;
 
 }
 
@@ -111,11 +111,8 @@ small {
   border-radius: 50%;
 } */
 .rightbox {
-  margin: auto;
-  float: right;
-  height: 100%;
-  margin-left: 150px;
-  width: 900px
+  margin: 3%;
+  width: 94%
 }
 
 label {
@@ -137,7 +134,7 @@ input {
   font-weight: 400;
   font-size: 24px;
   color: #3d3d3d;
-  max-width: 100%;
+  width: 90%;
   outline: none;
   border-top-style: hidden;
   border-right-style: hidden;
@@ -200,7 +197,7 @@ textarea {
   opacity: 0 !important;
   position: absolute;
   top: 0;
-  width: 100%;
+  width: 90%;
 }
 
 
@@ -253,8 +250,8 @@ textarea {
   select,
   textarea {
     font-size: 15px;
-    max-width: 30% !important;
-
+    width: 90% !important;
+    overflow-x: auto;
   }
 
   .picture-container .picture h6 {
@@ -272,13 +269,13 @@ textarea {
   }
 
   .profile {
-    margin-left: -70px;
-    width: 130%;
-    padding: 2%;
+    margin: 3%;
+    width: 94%;
+    padding: 15px 15px 15px 15px;
   }
 
   .container1 {
-    padding: 5%;
+    padding: 15px 15px 15px 15px;
   }
 
   .leftbox {
@@ -309,8 +306,7 @@ textarea {
 
   .rightbox {
     display: block;
-    margin-top: 7%;
-    margin-left: 20px;
+    margin: 3%;
   }
 
   label {

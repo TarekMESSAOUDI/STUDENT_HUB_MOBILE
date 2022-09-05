@@ -5,7 +5,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home/university"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -14,7 +14,7 @@
   <!--getAll-->
   <div class="container">
     <div class="header">
-      <h1>University calendar for the academic year {{ date }} - {{ nextYears }}</h1>
+      <h3>University calendar for the academic year {{ date }} - {{ nextYears }}</h3>
       <br>
       <div class="search-wrapper">
         <input type="text" #myInput [(ngModel)]="description" (input)="SearchPeriode()" class="search-input" placeholder="Search …" />
@@ -36,7 +36,9 @@
         <a *ngIf="universit" (click)="openalert(contentalert);setIdPeriode(p._id)">
           <fa-icon style="color: red; font-size: small; margin-left: 10px;" [icon]="faTrash"  class="material-icons"></fa-icon>
         </a>&nbsp; &nbsp;
-        <b>From</b>&nbsp; {{p.start}} &nbsp; <b>until</b>&nbsp;  {{p.end}} &nbsp; <b>:</b>&nbsp; <b style="color: #03c1ad;">{{p.description}}</b>
+        <div>
+          <b>From</b>&nbsp; {{p.start}} &nbsp; <b>until</b>&nbsp;  {{p.end}} &nbsp; <b>:</b>&nbsp; <b style="color: #03c1ad;">{{p.description}}</b>
+        </div>
       </div>
     </div>
   </div>

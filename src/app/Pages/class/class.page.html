@@ -5,22 +5,15 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home/niveau"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="container">
-    <form>
-      <button  type="button" class="btn btn-secondary" onclick="history.back()">
-        <fa-icon [icon]="faUndo"  class="material-icons"></fa-icon> Go back!
-      </button>
-    </form>
-    <br>
     <div class="header">
-      <h1> Here Is {{nClass}} Classrooms</h1>
-      <br>
+      <h3> Here Is {{nClass}} Classrooms</h3>
       <div class="search-wrapper">
         <input type="text" #myInput [(ngModel)]="nom" (input)="SearchClass()" class="search-input" placeholder="Search …" />
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24" >
@@ -29,7 +22,6 @@
           <path d="M21 21l-4.35-4.35"></path>
         </svg>
       </div>
-      <br>
       <div class="p-2 bd-highlight">
         <button type="button" class="btn btn-secondary" (click)="open(content)">
           New Classroom
